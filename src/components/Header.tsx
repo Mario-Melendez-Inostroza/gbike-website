@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, MessageCircle } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { siteConfig } from '../config/site'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
+import WhatsAppIcon from './WhatsAppIcon'
 
 const navLinks = siteConfig.navLinks
 
@@ -28,22 +29,20 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-18" style={{ height: '72px' }}>
         {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-2 group">
-          <div
-            className="w-9 h-9 flex items-center justify-center rounded"
-            style={{ background: '#E30613' }}
-          >
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <circle cx="6" cy="15" r="4" stroke="white" strokeWidth="2" fill="none" />
-              <circle cx="16" cy="15" r="4" stroke="white" strokeWidth="2" fill="none" />
-              <polyline points="6,15 9,8 13,10 16,5 18,5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            </svg>
-          </div>
+        <a href="#inicio" className="flex items-center gap-2.5 group">
+          <img
+            src="/images/logo/L1.jpeg"
+            alt=""
+            width={38}
+            height={38}
+            className="rounded-lg object-cover"
+            style={{ width: '38px', height: '38px' }}
+          />
           <span
-            className="font-display font-900 tracking-widest text-white text-xl"
+            className="font-display tracking-widest text-white text-xl"
             style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900, letterSpacing: '0.15em' }}
           >
-            G<span style={{ color: '#E30613' }}>BIKE</span>
+            <span style={{ color: '#E30613' }}>G</span>BIKE
           </span>
         </a>
 
@@ -76,7 +75,7 @@ export default function Header() {
             boxShadow: '0 4px 20px rgba(227,6,19,0.35)',
           }}
         >
-          <MessageCircle size={15} />
+          <WhatsAppIcon size={15} />
           Cotizar por WhatsApp
         </a>
 
@@ -114,7 +113,7 @@ export default function Header() {
             className="mt-4 flex items-center justify-center gap-2 text-white text-sm font-semibold px-5 py-3 rounded-full"
             style={{ background: '#E30613' }}
           >
-            <MessageCircle size={15} />
+            <WhatsAppIcon size={15} />
             Cotizar por WhatsApp
           </a>
         </div>

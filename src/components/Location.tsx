@@ -55,7 +55,7 @@ export default function Location() {
                     className="font-semibold text-[#0D0D0D] text-sm"
                     style={{ fontFamily: 'Inter, sans-serif' }}
                   >
-                    {business.address.line1},<br />
+                    {business.address.line1}<br />
                     {business.address.line2}
                   </p>
                 </div>
@@ -155,18 +155,62 @@ export default function Location() {
             </a>
           </div>
 
-          {/* Map */}
-          <div className="lg:col-span-3 rounded-2xl overflow-hidden" style={{ minHeight: '420px', background: '#E8E8E8' }}>
-            <iframe
-              title="Ubicación GBIKE Taller de Bicicletas"
-              src={business.address.mapsEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: '420px', display: 'block' }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          {/* Storefront photo + map */}
+          <div className="lg:col-span-3 flex flex-col gap-4">
+            {/* Photo of the actual store, so customers recognize it on arrival */}
+            <div className="relative rounded-2xl overflow-hidden group" style={{ background: '#111' }}>
+              <img
+                src="/images/location/location.jpeg"
+                alt="Fachada del local de GBIKE en Av. Providencia 2411, Local 25"
+                loading="lazy"
+                className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                style={{ objectPosition: 'center 35%' }}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(to top, rgba(13,13,13,0.65) 0%, transparent 45%)' }}
+              />
+              <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between gap-3">
+                <div>
+                  <p
+                    className="text-white text-sm font-semibold"
+                    style={{ fontFamily: 'Inter, sans-serif' }}
+                  >
+                    Así nos verás al llegar
+                  </p>
+                  <p
+                    className="text-white/70 text-xs"
+                    style={{ fontFamily: 'Inter, sans-serif' }}
+                  >
+                    {business.address.line1}
+                  </p>
+                </div>
+                <span
+                  className="px-3 py-1.5 rounded-lg text-xs font-bold tracking-wider flex-shrink-0"
+                  style={{
+                    background: 'rgba(227,6,19,0.9)',
+                    color: '#fff',
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                >
+                  LOCAL 25
+                </span>
+              </div>
+            </div>
+
+            {/* Map */}
+            <div className="rounded-2xl overflow-hidden flex-1" style={{ minHeight: '300px', background: '#E8E8E8' }}>
+              <iframe
+                title="Ubicación de GBIKE Taller de Bicicletas en Providencia, Santiago"
+                src={business.address.mapsEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '300px', display: 'block' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </div>

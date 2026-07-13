@@ -1,6 +1,7 @@
-import { MessageCircle, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { siteConfig } from '../config/site'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
+import WhatsAppIcon from './WhatsAppIcon'
 
 const InstagramSvg = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -24,34 +25,32 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div
-                className="w-9 h-9 flex items-center justify-center rounded"
-                style={{ background: '#E30613' }}
-              >
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                  <circle cx="6" cy="15" r="4" stroke="white" strokeWidth="2" fill="none" />
-                  <circle cx="16" cy="15" r="4" stroke="white" strokeWidth="2" fill="none" />
-                  <polyline points="6,15 9,8 13,10 16,5 18,5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                </svg>
-              </div>
+            <div className="flex items-center gap-2.5 mb-4">
+              <img
+                src="/images/logo/L1.jpeg"
+                alt=""
+                width={38}
+                height={38}
+                className="rounded-lg object-cover"
+                style={{ width: '38px', height: '38px' }}
+              />
               <span
                 className="text-white text-xl"
                 style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900, letterSpacing: '0.15em' }}
               >
-                G<span style={{ color: '#E30613' }}>BIKE</span>
+                <span style={{ color: '#E30613' }}>G</span>BIKE
               </span>
             </div>
             <p
               className="text-white/40 text-sm leading-relaxed max-w-xs mb-6"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
-              Taller profesional especializado en el mantenimiento, reparación y accesorios para todo tipo de bicicletas. Tu rodada, nuestra pasión.
+              Servicios y venta de accesorios para bicicletas en Providencia, Santiago. La aventura comienza aquí.
             </p>
             {/* Socials */}
             <div className="flex gap-3">
               {[
-                { Icon: () => <MessageCircle size={16} color="rgba(255,255,255,0.7)" />, href: whatsappUrl(), label: 'WhatsApp' },
+                { Icon: () => <span style={{ color: 'rgba(255,255,255,0.7)', display: 'flex' }}><WhatsAppIcon size={16} /></span>, href: whatsappUrl(), label: 'WhatsApp' },
                 { Icon: InstagramSvg, href: business.social.instagram.url, label: 'Instagram' },
                 { Icon: FacebookSvg, href: business.social.facebook.url, label: 'Facebook' },
                 { Icon: () => <Mail size={16} color="rgba(255,255,255,0.7)" />, href: `mailto:${business.email}`, label: 'Email' },
@@ -126,15 +125,8 @@ export default function Footer() {
             className="text-white/25 text-xs"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
-            © 2025 GBIKE — Taller de Bicicletas. Todos los derechos reservados.
+            © {new Date().getFullYear()} {siteConfig.legalName}. Todos los derechos reservados.
           </p>
-          <a
-            href="#"
-            className="text-white/25 hover:text-white/50 text-xs transition-colors"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
-            Política de Privacidad
-          </a>
         </div>
       </div>
     </footer>

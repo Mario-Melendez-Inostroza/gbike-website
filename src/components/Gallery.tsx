@@ -1,41 +1,60 @@
-const photos = [
-  {
-    src: 'https://images.unsplash.com/photo-1534150034764-046bf225d3fa?w=600&h=400&fit=crop&auto=format',
-    alt: 'Mountain bike negro GBIKE',
-    span: 'col-span-1 row-span-2',
-    height: 'h-full min-h-[360px]',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1562615193-cbeef074a501?w=700&h=320&fit=crop&auto=format',
-    alt: 'Cassette de bicicleta de montaña',
-    span: 'col-span-2 row-span-1',
-    height: 'h-52',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1675798227643-da319f8ee8f7?w=400&h=320&fit=crop&auto=format',
-    alt: 'Mecánico reparando bicicleta',
-    span: 'col-span-1 row-span-1',
-    height: 'h-52',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1535369643553-a33e0d1ac81d?w=500&h=460&fit=crop&auto=format',
-    alt: 'Ciclista en sendero de montaña',
-    span: 'col-span-1 row-span-2',
-    height: 'h-full min-h-[360px]',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1606087492572-424ebe0f2f61?w=500&h=300&fit=crop&auto=format',
-    alt: 'Bicicleta de montaña en acción',
-    span: 'col-span-1 row-span-1',
-    height: 'h-44',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1621122940876-2b3be129159c?w=500&h=300&fit=crop&auto=format',
-    alt: 'Ciclista en campo abierto',
-    span: 'col-span-1 row-span-1',
-    height: 'h-44',
-  },
+const works = [
+  { src: '/images/gallery/works/1w.jpeg', alt: 'Trabajo de mantenimiento realizado en el taller GBIKE' },
+  { src: '/images/gallery/works/2w.jpeg', alt: 'Bicicleta en servicio técnico en el taller GBIKE' },
+  { src: '/images/gallery/works/3wjpeg.jpeg', alt: 'Reparación de bicicleta en el taller GBIKE' },
+  { src: '/images/gallery/works/4w.jpeg', alt: 'Puesta a punto de bicicleta en GBIKE' },
+  { src: '/images/gallery/works/5w.jpeg', alt: 'Bicicleta reparada y lista para entrega en GBIKE' },
+  { src: '/images/gallery/works/6w.jpeg', alt: 'Servicio de transmisión realizado en GBIKE' },
+  { src: '/images/gallery/works/w7.jpeg', alt: 'Detalle de trabajo mecánico en el taller GBIKE' },
 ]
+
+const products = [
+  { src: '/images/gallery/products/1p.jpeg', alt: 'Accesorios para bicicleta disponibles en GBIKE' },
+  { src: '/images/gallery/products/2p.jpeg', alt: 'Repuestos para bicicleta en la tienda GBIKE' },
+  { src: '/images/gallery/products/3p.jpeg', alt: 'Productos y accesorios en exhibición en GBIKE' },
+  { src: '/images/gallery/products/4p.jpeg', alt: 'Venta de accesorios para ciclismo en GBIKE' },
+]
+
+function PhotoCard({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-2xl group ${className}`}
+      style={{ background: '#111' }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-90"
+      />
+      {/* Overlay on hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(13,13,13,0.55) 0%, transparent 55%)' }}
+      />
+      {/* Red accent corner */}
+      <div
+        className="absolute top-0 right-0 w-0 h-0 group-hover:w-8 group-hover:h-8 transition-all duration-300 rounded-bl-2xl"
+        style={{ background: '#E30613' }}
+      />
+    </div>
+  )
+}
+
+function GroupLabel({ children }: { children: string }) {
+  return (
+    <div className="flex items-center gap-4 mb-6">
+      <h3
+        className="font-display text-2xl uppercase"
+        style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 800, letterSpacing: '0.02em' }}
+      >
+        {children}
+      </h3>
+      <div className="h-px flex-1" style={{ background: '#E8E8E8' }} />
+      <div className="w-8 h-0.5 rounded-full" style={{ background: '#E30613' }} />
+    </div>
+  )
+}
 
 export default function Gallery() {
   return (
@@ -71,39 +90,35 @@ export default function Gallery() {
           </p>
         </div>
 
-        {/* Masonry-style grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" style={{ gridAutoRows: '180px' }}>
-          {photos.map((photo, i) => (
-            <div
-              key={i}
-              className={`${photo.span} relative overflow-hidden rounded-2xl group cursor-pointer`}
-              style={{ background: '#111' }}
-            >
-              <img
+        {/* Works */}
+        <div className="mb-14">
+          <GroupLabel>Trabajos realizados</GroupLabel>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" style={{ gridAutoRows: '200px' }}>
+            {works.map((photo, i) => (
+              <PhotoCard
+                key={photo.src}
                 src={photo.src}
                 alt={photo.alt}
-                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                // Las dos fotos horizontales anclan la composición ocupando doble celda
+                className={i === 1 || i === 6 ? 'col-span-2 row-span-1' : 'col-span-1 row-span-2'}
               />
-              {/* Overlay on hover */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"
-                style={{ background: 'linear-gradient(to top, rgba(13,13,13,0.75) 0%, transparent 60%)' }}
-              >
-                <span
-                  className="text-white text-xs font-medium"
-                  style={{ fontFamily: 'Inter, sans-serif' }}
-                >
-                  {photo.alt}
-                </span>
-              </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Red accent corner */}
-              <div
-                className="absolute top-0 right-0 w-0 h-0 group-hover:w-8 group-hover:h-8 transition-all duration-300 rounded-bl-2xl"
-                style={{ background: '#E30613' }}
+        {/* Products */}
+        <div>
+          <GroupLabel>Productos y accesorios</GroupLabel>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {products.map((photo) => (
+              <PhotoCard
+                key={photo.src}
+                src={photo.src}
+                alt={photo.alt}
+                className="aspect-[3/4]"
               />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

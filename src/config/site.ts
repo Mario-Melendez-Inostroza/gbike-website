@@ -8,7 +8,6 @@
  *   (ver loadBusinessConfig.ts); estos valores actúan como fallback seguro
  *   si el JSON falta, está corrupto o algún campo no pasa validación.
  *
- * TODO: confirmar teléfono, dirección y redes sociales con los datos reales del taller.
  */
 
 export interface SocialLink {
@@ -46,37 +45,39 @@ export interface BusinessConfig {
 
 export const defaultBusinessConfig: BusinessConfig = {
   phone: {
-    display: '+593 98 765 4321',
-    href: 'tel:+593987654321',
+    display: '+56 9 6619 4086',
+    href: 'tel:+56966194086',
   },
   whatsapp: {
-    number: '593987654321',
-    displayNumber: '+593 98 765 4321',
+    number: '56966194086',
+    displayNumber: '+56 9 6619 4086',
   },
-  email: 'contacto@gbike.ec',
+  email: 'contactogbike@gmail.com',
   address: {
-    line1: 'Av. Colón y 10 de Agosto',
-    line2: 'Local 12 — Quito, Ecuador',
-    mapsUrl: 'https://maps.google.com/?q=Av.+Col%C3%B3n+y+10+de+Agosto+Quito',
+    line1: 'Av. Providencia 2411, Local Nº25',
+    line2: 'Providencia — Santiago, Chile',
+    // TODO: reemplazar por el enlace "Compartir" de la ficha de Google Business Profile de GBIKE cuando esté disponible.
+    mapsUrl:
+      'https://www.google.com/maps/search/?api=1&query=Av.+Providencia+2411,+Providencia,+Santiago,+Chile',
     mapsEmbedUrl:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7947427!2d-78.4983!3d-0.2105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a4002427c9f%3A0x44b991e158ef5572!2sAv.+Col%C3%B3n%2C+Quito!5e0!3m2!1ses!2sec!4v1720000000000',
+      'https://www.google.com/maps?q=Av.+Providencia+2411,+Providencia,+Santiago,+Chile&output=embed',
   },
   social: {
-    instagram: { handle: '@gbike.ec', url: 'https://instagram.com/gbike.ec' },
-    facebook: { handle: 'GBIKE Taller', url: 'https://facebook.com/gbike' },
+    instagram: { handle: '@gbike.cl', url: 'https://instagram.com/gbike.cl' },
+    facebook: { handle: 'GBIKE', url: 'https://facebook.com/gbike' },
   },
   hours: [
-    { day: 'Lunes – Viernes', time: '8:00 – 18:00' },
-    { day: 'Sábado', time: '9:00 – 16:00' },
-    { day: 'Domingo', time: 'Cerrado' },
+    { day: 'Lunes – Viernes', time: '10:00 – 19:30' },
+    { day: 'Sábados, Domingos y Festivos', time: '10:00 – 14:00' },
   ],
 }
 
 export const siteConfig = {
   name: 'GBIKE',
   legalName: 'GBIKE — Taller de Bicicletas',
+  domain: 'https://gbike.cl',
   description:
-    'Taller profesional de bicicletas en Quito. Mantenimiento, reparación, armado y venta de repuestos con técnicos especializados y trabajo garantizado.',
+    'Taller de bicicletas en Providencia, Santiago. Mantenimiento, reparación, armado y venta de repuestos y accesorios con técnicos especializados.',
   navLinks: [
     { label: 'Inicio', href: '#inicio' },
     { label: 'Servicios', href: '#servicios' },

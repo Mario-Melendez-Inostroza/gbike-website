@@ -1,5 +1,6 @@
-import { MessageCircle, ChevronDown, Wrench } from 'lucide-react'
+import { ChevronDown, Wrench, ShieldCheck } from 'lucide-react'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
+import WhatsAppIcon from './WhatsAppIcon'
 
 export default function Hero() {
   const { whatsappUrl } = useBusinessConfig()
@@ -88,28 +89,34 @@ export default function Hero() {
             Mantenimiento, reparación y accesorios para que tu bicicleta siempre esté lista. Técnicos especializados, repuestos de calidad y trabajo garantizado.
           </p>
 
-          {/* Stats row */}
-          <div className="flex gap-10 mb-12">
-            {[
-              { value: '+500', label: 'Bicicletas reparadas' },
-              { value: '+8', label: 'Años de experiencia' },
-              { value: '100%', label: 'Satisfacción garantizada' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div
-                  className="font-display font-900 text-3xl text-white"
-                  style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900, color: '#E30613' }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  className="text-xs text-white/50 mt-0.5"
-                  style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.04em' }}
-                >
-                  {stat.label}
-                </div>
+          {/* Guarantee highlight */}
+          <div
+            className="inline-flex items-center gap-4 mb-12 pl-4 pr-6 py-3 rounded-2xl"
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+            }}
+          >
+            <div
+              className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+              style={{ background: 'rgba(227,6,19,0.15)', border: '1px solid rgba(227,6,19,0.35)' }}
+            >
+              <ShieldCheck size={22} style={{ color: '#E30613' }} />
+            </div>
+            <div>
+              <div
+                className="font-display text-3xl leading-none"
+                style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900, color: '#E30613' }}
+              >
+                100%
               </div>
-            ))}
+              <div
+                className="text-xs text-white/60 mt-1"
+                style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.04em' }}
+              >
+                Satisfacción garantizada
+              </div>
+            </div>
           </div>
 
           {/* CTAs */}
@@ -136,7 +143,7 @@ export default function Hero() {
                 background: 'rgba(255,255,255,0.08)',
               }}
             >
-              <MessageCircle size={16} />
+              <WhatsAppIcon size={16} />
               Escríbenos por WhatsApp
             </a>
           </div>

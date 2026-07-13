@@ -1,8 +1,14 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
-import { MessageCircle, Mail, Send, CheckCircle2 } from 'lucide-react'
+import { Mail, Send, CheckCircle2 } from 'lucide-react'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
+import WhatsAppLogo from './WhatsAppIcon'
+import { services } from './Services'
 
-const WhatsAppIcon = () => <MessageCircle size={18} color="#fff" />
+const WhatsAppIcon = () => (
+  <span style={{ color: '#fff', display: 'flex' }}>
+    <WhatsAppLogo size={18} />
+  </span>
+)
 const InstagramIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -252,13 +258,9 @@ export default function Contact() {
                     onChange={(e) => setForm({ ...form, service: e.target.value })}
                   >
                     <option value="">Selecciona un servicio...</option>
-                    <option>Mantenimiento básico</option>
-                    <option>Mantenimiento general</option>
-                    <option>Mantenimiento Full</option>
-                    <option>Centrado de rueda</option>
-                    <option>Ajuste de frenos</option>
-                    <option>Ajuste de cambios</option>
-                    <option>Armado de bicicleta</option>
+                    {services.map((svc) => (
+                      <option key={svc.title} value={svc.title}>{svc.title}</option>
+                    ))}
                     <option>Otro</option>
                   </select>
                 </div>

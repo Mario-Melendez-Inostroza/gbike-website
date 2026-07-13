@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { MessageCircle, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { siteConfig } from '../config/site'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
+import WhatsAppIcon from './WhatsAppIcon'
 
 export default function WhatsAppFloat() {
   const [open, setOpen] = useState(false)
@@ -24,7 +25,9 @@ export default function WhatsAppFloat() {
               className="w-10 h-10 rounded-full flex items-center justify-center"
               style={{ background: '#25D366' }}
             >
-              <MessageCircle size={20} color="#fff" />
+              <span style={{ color: '#fff', display: 'flex' }}>
+                <WhatsAppIcon size={20} />
+              </span>
             </div>
             <div>
               <div
@@ -38,7 +41,7 @@ export default function WhatsAppFloat() {
                 style={{ color: '#25D366', fontFamily: 'Inter, sans-serif' }}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
-                En línea ahora
+                Respondemos muy rápido
               </div>
             </div>
           </div>
@@ -55,7 +58,7 @@ export default function WhatsAppFloat() {
             className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-white text-sm font-semibold transition-all hover:opacity-90"
             style={{ background: '#25D366', fontFamily: 'Inter, sans-serif' }}
           >
-            <MessageCircle size={15} />
+            <WhatsAppIcon size={15} />
             Iniciar chat
           </a>
         </div>
@@ -71,7 +74,7 @@ export default function WhatsAppFloat() {
         }}
         aria-label="Contactar por WhatsApp"
       >
-        {open ? <X size={22} /> : <MessageCircle size={24} />}
+        {open ? <X size={22} /> : <WhatsAppIcon size={26} />}
       </button>
     </div>
   )

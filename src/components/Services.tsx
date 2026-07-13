@@ -1,86 +1,108 @@
 import {
   Wrench, RotateCcw, Zap, CircleDot, Disc, Settings,
   Droplets, Minus, Package, CircleOff, Layers, Box,
-  Plus, ShoppingBag
+  Plus, ShoppingBag, Compass, Cog, LifeBuoy, Link, Luggage,
 } from 'lucide-react'
-import { useState } from 'react'
 
-const services = [
+export const services = [
   {
     icon: Wrench,
     title: 'Mantenimiento Básico',
-    desc: 'Limpieza, lubricación y ajuste de componentes esenciales.',
+    desc: 'Revisión, limpieza y ajuste de los componentes esenciales de tu bicicleta.',
   },
   {
     icon: Settings,
     title: 'Mantenimiento General',
-    desc: 'Revisión completa de frenos, cambios, ruedas y transmisión.',
+    desc: 'Puesta a punto completa: frenos, cambios, ruedas y transmisión.',
   },
   {
     icon: Zap,
     title: 'Mantenimiento Full',
-    desc: 'Servicio integral: desmontaje total, limpieza profunda y calibración.',
+    desc: 'Servicio integral con desmontaje total, limpieza profunda y calibración de cada componente.',
   },
   {
     icon: CircleDot,
     title: 'Centrado de Rueda',
-    desc: 'Corrección de alabeos y tensión de radios para rodaje perfecto.',
+    desc: 'Corrección de alabeos y tensión de rayos para un rodado firme y preciso.',
   },
   {
     icon: Disc,
     title: 'Ajuste de Frenos',
-    desc: 'Calibración de frenos de disco o zapata para máxima seguridad.',
+    desc: 'Calibración de frenos de disco o herradura para una frenada segura.',
   },
   {
     icon: RotateCcw,
     title: 'Ajuste de Cambios',
-    desc: 'Regulación precisa de desviadores y palancas de cambio.',
+    desc: 'Regulación fina de desviadores y manillas para cambios suaves y exactos.',
   },
   {
-    icon: Droplets,
-    title: 'Lubricación',
-    desc: 'Aplicación de lubricantes especializados en cadena y mecanismos.',
+    icon: Compass,
+    title: 'Engrase de Dirección',
+    desc: 'Desmontaje, limpieza y engrase del juego de dirección para un manejo fluido.',
+  },
+  {
+    icon: Cog,
+    title: 'Engrase de Motor',
+    desc: 'Mantenimiento del eje de centro con grasa de alta resistencia.',
+  },
+  {
+    icon: LifeBuoy,
+    title: 'Engrase de Rueda',
+    desc: 'Limpieza y engrase de masas para un giro libre y silencioso.',
   },
   {
     icon: Minus,
-    title: 'Cambio de Piolas',
-    desc: 'Reemplazo de cables de freno y cambio deteriorados.',
+    title: 'Cambio de Piola',
+    desc: 'Reemplazo de cables de freno o cambio desgastados por piolas nuevas.',
   },
   {
     icon: Package,
-    title: 'Cambio de Fundas',
-    desc: 'Renovación de carcasas para un accionamiento suave y preciso.',
+    title: 'Cambio de Funda',
+    desc: 'Renovación de fundas para un accionamiento suave y protegido.',
   },
   {
-    icon: CircleOff,
-    title: 'Instalación de Cámaras',
-    desc: 'Montaje de cámaras de aire con materiales de primera calidad.',
+    icon: Droplets,
+    title: 'Lavado de Bicicleta y Transmisión',
+    desc: 'Lavado completo con desengrase profundo de cadena, cassette y platos.',
   },
   {
-    icon: Layers,
-    title: 'Instalación de Neumáticos',
-    desc: 'Montaje y balanceo de cubiertas para todo tipo de terreno.',
+    icon: Link,
+    title: 'Lubricación de Cadena',
+    desc: 'Aplicación de lubricante específico según tu tipo de uso y terreno.',
+  },
+  {
+    icon: Luggage,
+    title: 'Instalación de Parrilla',
+    desc: 'Montaje firme y alineado de parrillas portaequipaje.',
+  },
+  {
+    icon: Plus,
+    title: 'Instalación Simple',
+    desc: 'Montaje de accesorios: luces, alforjas, guardabarros, portabidones y más.',
   },
   {
     icon: Box,
     title: 'Armado de Bicicletas',
-    desc: 'Ensamble completo de bicicletas desde caja o piezas sueltas.',
+    desc: 'Ensamble completo y regulado de bicicletas nuevas desde caja.',
   },
   {
-    icon: Plus,
-    title: 'Instalación de Accesorios',
-    desc: 'Montaje de porta-bidones, luz, GPS, guardabarros y más.',
+    icon: CircleOff,
+    title: 'Instalación de Cámara',
+    desc: 'Cambio de cámaras con revisión del neumático y la llanta.',
+  },
+  {
+    icon: Layers,
+    title: 'Instalación de Neumáticos',
+    desc: 'Montaje de neumáticos nuevos con la presión adecuada para tu rodado.',
   },
   {
     icon: ShoppingBag,
-    title: 'Venta de Repuestos',
-    desc: 'Repuestos originales y de alta calidad para todas las marcas.',
+    title: 'Venta de Repuestos y Accesorios',
+    desc: 'Repuestos y accesorios de calidad para todas las marcas y estilos.',
   },
 ]
 
 export default function Services() {
-  const [hovered, setHovered] = useState<number | null>(null)
-
   return (
     <section id="servicios" className="py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -117,27 +139,24 @@ export default function Services() {
 
         {/* Services grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {services.map((svc, i) => {
+          {services.map((svc) => {
             const Icon = svc.icon
-            const isHovered = hovered === i
             return (
               <div
                 key={svc.title}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                className="relative p-6 rounded-2xl cursor-default transition-all duration-300"
+                className="group relative p-6 rounded-2xl cursor-default transition-all duration-300 hover:-translate-y-1"
                 style={{
-                  background: isHovered ? '#0D0D0D' : '#F8F8F8',
-                  border: isHovered ? '1.5px solid rgba(227,6,19,0.4)' : '1.5px solid transparent',
-                  transform: isHovered ? 'translateY(-4px)' : 'none',
-                  boxShadow: isHovered ? '0 16px 40px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.04)',
+                  background: '#0D0D0D',
+                  border: '1.5px solid rgba(255,255,255,0.04)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
                 }}
               >
                 {/* Icon */}
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-all duration-300"
+                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-105"
                   style={{
-                    background: isHovered ? 'rgba(227,6,19,0.15)' : 'rgba(227,6,19,0.08)',
+                    background: 'rgba(227,6,19,0.12)',
+                    border: '1px solid rgba(227,6,19,0.25)',
                   }}
                 >
                   <Icon size={20} style={{ color: '#E30613' }} />
@@ -145,33 +164,30 @@ export default function Services() {
 
                 {/* Title */}
                 <h3
-                  className="font-semibold mb-2 text-sm transition-colors duration-300"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    color: isHovered ? '#ffffff' : '#0D0D0D',
-                  }}
+                  className="font-semibold mb-2 text-sm text-white"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
                 >
                   {svc.title}
                 </h3>
 
                 {/* Desc */}
                 <p
-                  className="text-xs leading-relaxed transition-colors duration-300"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    color: isHovered ? 'rgba(255,255,255,0.55)' : '#6B6B6B',
-                  }}
+                  className="text-xs leading-relaxed"
+                  style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(255,255,255,0.5)' }}
                 >
                   {svc.desc}
                 </p>
 
                 {/* Bottom accent line */}
                 <div
-                  className="absolute bottom-0 left-6 right-6 h-px transition-all duration-300"
-                  style={{
-                    background: isHovered ? 'rgba(227,6,19,0.5)' : 'transparent',
-                    borderRadius: '0 0 2px 2px',
-                  }}
+                  className="absolute bottom-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'linear-gradient(90deg, transparent, #E30613, transparent)' }}
+                />
+
+                {/* Red border glow on hover */}
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{ border: '1.5px solid rgba(227,6,19,0.45)', boxShadow: '0 16px 40px rgba(227,6,19,0.12)' }}
                 />
               </div>
             )
