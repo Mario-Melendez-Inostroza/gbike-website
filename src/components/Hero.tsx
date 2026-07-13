@@ -1,7 +1,8 @@
 import { MessageCircle, ChevronDown, Wrench } from 'lucide-react'
-import { whatsappUrl } from '../config/site'
+import { useBusinessConfig } from '../config/BusinessConfigContext'
 
 export default function Hero() {
+  const { whatsappUrl } = useBusinessConfig()
   return (
     <section
       id="inicio"

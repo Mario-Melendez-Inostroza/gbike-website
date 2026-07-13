@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { MessageCircle, X } from 'lucide-react'
-import { siteConfig, whatsappUrl } from '../config/site'
+import { siteConfig } from '../config/site'
+import { useBusinessConfig } from '../config/BusinessConfigContext'
 
 export default function WhatsAppFloat() {
   const [open, setOpen] = useState(false)
+  const { whatsappUrl } = useBusinessConfig()
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">

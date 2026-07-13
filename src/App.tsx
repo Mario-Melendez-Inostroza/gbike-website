@@ -3,8 +3,6 @@ import Hero from './components/Hero'
 import Services from './components/Services'
 import WhyUs from './components/WhyUs'
 import Gallery from './components/Gallery'
-import Testimonials from './components/Testimonials'
-import BeforeAfter from './components/BeforeAfter'
 import Location from './components/Location'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -19,8 +17,6 @@ export default function App() {
         <Services />
         <WhyUs />
         <Gallery />
-        <Testimonials />
-        <BeforeAfter />
         <Location />
         <Contact />
       </main>

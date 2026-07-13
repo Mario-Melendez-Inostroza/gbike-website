@@ -1,5 +1,6 @@
 import { MessageCircle, Mail } from 'lucide-react'
-import { siteConfig, whatsappUrl } from '../config/site'
+import { siteConfig } from '../config/site'
+import { useBusinessConfig } from '../config/BusinessConfigContext'
 
 const InstagramSvg = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -15,6 +16,7 @@ const FacebookSvg = () => (
 )
 
 export default function Footer() {
+  const { business, whatsappUrl } = useBusinessConfig()
   return (
     <footer style={{ background: '#0D0D0D' }}>
       {/* Main footer */}
@@ -50,9 +52,9 @@ export default function Footer() {
             <div className="flex gap-3">
               {[
                 { Icon: () => <MessageCircle size={16} color="rgba(255,255,255,0.7)" />, href: whatsappUrl(), label: 'WhatsApp' },
-                { Icon: InstagramSvg, href: siteConfig.social.instagram.url, label: 'Instagram' },
-                { Icon: FacebookSvg, href: siteConfig.social.facebook.url, label: 'Facebook' },
-                { Icon: () => <Mail size={16} color="rgba(255,255,255,0.7)" />, href: `mailto:${siteConfig.email}`, label: 'Email' },
+                { Icon: InstagramSvg, href: business.social.instagram.url, label: 'Instagram' },
+                { Icon: FacebookSvg, href: business.social.facebook.url, label: 'Facebook' },
+                { Icon: () => <Mail size={16} color="rgba(255,255,255,0.7)" />, href: `mailto:${business.email}`, label: 'Email' },
               ].map(({ Icon, href, label }) => (
                 <a
                   key={label}
@@ -101,15 +103,15 @@ export default function Footer() {
               Contacto
             </h4>
             <ul className="flex flex-col gap-3 text-sm text-white/55" style={{ fontFamily: 'Inter, sans-serif' }}>
-              <li>{siteConfig.address.line1}<br />{siteConfig.address.line2}</li>
+              <li>{business.address.line1}<br />{business.address.line2}</li>
               <li>
-                <a href={siteConfig.phone.href} className="hover:text-white transition-colors">
-                  {siteConfig.phone.display}
+                <a href={business.phone.href} className="hover:text-white transition-colors">
+                  {business.phone.display}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors">
-                  {siteConfig.email}
+                <a href={`mailto:${business.email}`} className="hover:text-white transition-colors">
+                  {business.email}
                 </a>
               </li>
             </ul>

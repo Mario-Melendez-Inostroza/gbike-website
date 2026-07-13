@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { MessageCircle, Mail, Send, CheckCircle2 } from 'lucide-react'
-import { siteConfig, whatsappUrl } from '../config/site'
+import { useBusinessConfig } from '../config/BusinessConfigContext'
 
 const WhatsAppIcon = () => <MessageCircle size={18} color="#fff" />
 const InstagramIcon = () => (
@@ -17,36 +17,7 @@ const FacebookIcon = () => (
 )
 const MailIcon = () => <Mail size={18} color="#fff" />
 
-const socials: { icon: () => ReactNode; label: string; handle: string; href: string; bg: string }[] = [
-  {
-    icon: WhatsAppIcon,
-    label: 'WhatsApp',
-    handle: siteConfig.whatsapp.displayNumber,
-    href: whatsappUrl(),
-    bg: '#25D366',
-  },
-  {
-    icon: InstagramIcon,
-    label: 'Instagram',
-    handle: siteConfig.social.instagram.handle,
-    href: siteConfig.social.instagram.url,
-    bg: '#E1306C',
-  },
-  {
-    icon: FacebookIcon,
-    label: 'Facebook',
-    handle: siteConfig.social.facebook.handle,
-    href: siteConfig.social.facebook.url,
-    bg: '#1877F2',
-  },
-  {
-    icon: MailIcon,
-    label: 'Correo',
-    handle: siteConfig.email,
-    href: `mailto:${siteConfig.email}`,
-    bg: '#E30613',
-  },
-]
+type SocialChannel = { icon: () => ReactNode; label: string; handle: string; href: string; bg: string }
 
 type ContactFormData = {
   name: string
@@ -57,30 +28,62 @@ type ContactFormData = {
 }
 
 /**
- * Envía la solicitud de contacto.
- * Hoy no existe backend: se abre WhatsApp con el mensaje prellenado,
- * que es el canal real de atención del taller.
+ * Construye el mensaje de la solicitud de contacto.
+ * Hoy no existe backend: el formulario abre WhatsApp con este mensaje
+ * prellenado, que es el canal real de atención del taller.
  * TODO: reemplazar por una llamada a la API / servicio de email cuando exista backend.
  */
-function submitContactForm(data: ContactFormData): void {
-  const lines = [
+function buildWhatsAppMessage(data: ContactFormData): string {
+  return [
     `Hola, soy ${data.name}.`,
     data.service && `Servicio: ${data.service}`,
     data.phone && `Teléfono: ${data.phone}`,
     `Correo: ${data.email}`,
     data.message && `Mensaje: ${data.message}`,
-  ].filter(Boolean)
-
-  window.open(whatsappUrl(lines.join('\n')), '_blank', 'noopener,noreferrer')
+  ]
+    .filter(Boolean)
+    .join('\n')
 }
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' })
+  const { business, whatsappUrl } = useBusinessConfig()
+
+  const socials: SocialChannel[] = [
+    {
+      icon: WhatsAppIcon,
+      label: 'WhatsApp',
+      handle: business.whatsapp.displayNumber,
+      href: whatsappUrl(),
+      bg: '#25D366',
+    },
+    {
+      icon: InstagramIcon,
+      label: 'Instagram',
+      handle: business.social.instagram.handle,
+      href: business.social.instagram.url,
+      bg: '#E1306C',
+    },
+    {
+      icon: FacebookIcon,
+      label: 'Facebook',
+      handle: business.social.facebook.handle,
+      href: business.social.facebook.url,
+      bg: '#1877F2',
+    },
+    {
+      icon: MailIcon,
+      label: 'Correo',
+      handle: business.email,
+      href: `mailto:${business.email}`,
+      bg: '#E30613',
+    },
+  ]
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    submitContactForm(form)
+    window.open(whatsappUrl(buildWhatsAppMessage(form)), '_blank', 'noopener,noreferrer')
     setSent(true)
   }
 

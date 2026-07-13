@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Menu, X, MessageCircle } from 'lucide-react'
-import { siteConfig, whatsappUrl } from '../config/site'
+import { siteConfig } from '../config/site'
+import { useBusinessConfig } from '../config/BusinessConfigContext'
 
 const navLinks = siteConfig.navLinks
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { whatsappUrl } = useBusinessConfig()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)

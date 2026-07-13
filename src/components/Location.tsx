@@ -1,9 +1,9 @@
 import { MapPin, Clock, Phone, Navigation } from 'lucide-react'
-import { siteConfig } from '../config/site'
-
-const hours = siteConfig.hours
+import { useBusinessConfig } from '../config/BusinessConfigContext'
 
 export default function Location() {
+  const { business } = useBusinessConfig()
+  const hours = business.hours
   return (
     <section className="py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -55,8 +55,8 @@ export default function Location() {
                     className="font-semibold text-[#0D0D0D] text-sm"
                     style={{ fontFamily: 'Inter, sans-serif' }}
                   >
-                    {siteConfig.address.line1},<br />
-                    {siteConfig.address.line2}
+                    {business.address.line1},<br />
+                    {business.address.line2}
                   </p>
                 </div>
               </div>
@@ -82,11 +82,11 @@ export default function Location() {
                     Teléfono
                   </p>
                   <a
-                    href={siteConfig.phone.href}
+                    href={business.phone.href}
                     className="font-semibold text-[#0D0D0D] text-sm hover:text-[#E30613] transition-colors"
                     style={{ fontFamily: 'Inter, sans-serif' }}
                   >
-                    {siteConfig.phone.display}
+                    {business.phone.display}
                   </a>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function Location() {
 
             {/* CTA */}
             <a
-              href={siteConfig.address.mapsUrl}
+              href={business.address.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 py-4 px-6 rounded-2xl text-white text-sm font-semibold transition-all duration-200 hover:scale-105"
@@ -159,7 +159,7 @@ export default function Location() {
           <div className="lg:col-span-3 rounded-2xl overflow-hidden" style={{ minHeight: '420px', background: '#E8E8E8' }}>
             <iframe
               title="Ubicación GBIKE Taller de Bicicletas"
-              src={siteConfig.address.mapsEmbedUrl}
+              src={business.address.mapsEmbedUrl}
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: '420px', display: 'block' }}
