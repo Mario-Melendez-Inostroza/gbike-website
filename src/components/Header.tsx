@@ -29,17 +29,21 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-18" style={{ height: '72px' }}>
         {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-1.5 group">
+        <a
+          href="#inicio"
+          className="flex items-center gap-2.5 group transition-opacity duration-300 hover:opacity-90"
+          aria-label="GBIKE — ir al inicio"
+        >
           <img
             src="/images/logo/L1.webp"
             alt=""
-            width={52}
-            height={52}
-            className="rounded-lg object-cover"
-            style={{ width: '52px', height: '52px' }}
+            width={64}
+            height={64}
+            className="rounded-lg object-cover transition-all duration-300 group-hover:brightness-110"
+            style={{ width: '64px', height: '64px' }}
           />
           <span
-            className="font-display tracking-widest text-white text-xl"
+            className="font-display tracking-widest text-white text-2xl transition-colors duration-300"
             style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900, letterSpacing: '0.15em' }}
           >
             <span style={{ color: '#E30613' }}>G</span>BIKE
