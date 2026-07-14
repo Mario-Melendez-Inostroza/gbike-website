@@ -27,7 +27,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
               <img
-                src="/images/logo/L1.jpeg"
+                src="/images/logo/L1.webp"
                 alt=""
                 width={38}
                 height={38}
@@ -42,7 +42,7 @@ export default function Footer() {
               </span>
             </div>
             <p
-              className="text-white/40 text-sm leading-relaxed max-w-xs mb-6"
+              className="text-white/50 text-sm leading-relaxed max-w-xs mb-6"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Servicios y venta de accesorios para bicicletas en Providencia, Santiago. La aventura comienza aquí.
@@ -73,7 +73,7 @@ export default function Footer() {
           {/* Links */}
           <div>
             <h4
-              className="text-white/40 text-xs font-semibold tracking-widest uppercase mb-5"
+              className="text-white/50 text-xs font-semibold tracking-widest uppercase mb-5"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Navegación
@@ -96,7 +96,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4
-              className="text-white/40 text-xs font-semibold tracking-widest uppercase mb-5"
+              className="text-white/50 text-xs font-semibold tracking-widest uppercase mb-5"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Contacto
@@ -122,10 +122,10 @@ export default function Footer() {
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p
-            className="text-white/25 text-xs"
+            className="text-white/50 text-xs"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
-            © {new Date().getFullYear()} {siteConfig.legalName}. Todos los derechos reservados.
+            © {new Date().getFullYear()} {siteConfig.name} · Todos los derechos reservados.
           </p>
         </div>
       </div>

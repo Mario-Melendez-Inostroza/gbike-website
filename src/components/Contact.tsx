@@ -2,7 +2,7 @@ import { useState, type FormEvent, type ReactNode } from 'react'
 import { Mail, Send, CheckCircle2 } from 'lucide-react'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
 import WhatsAppLogo from './WhatsAppIcon'
-import { services } from './Services'
+import { maintenancePlans } from './Services'
 
 const WhatsAppIcon = () => (
   <span style={{ color: '#fff', display: 'flex' }}>
@@ -204,10 +204,11 @@ export default function Contact() {
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <label htmlFor="contact-name" className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
                       Nombre
                     </label>
                     <input
+                      id="contact-name"
                       required
                       type="text"
                       placeholder="Tu nombre completo"
@@ -218,12 +219,13 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <label htmlFor="contact-phone" className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
                       Teléfono
                     </label>
                     <input
+                      id="contact-phone"
                       type="tel"
-                      placeholder="+593 9X XXX XXXX"
+                      placeholder="+56 9 XXXX XXXX"
                       className={inputClass}
                       style={inputStyle}
                       value={form.phone}
@@ -233,10 +235,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <label htmlFor="contact-email" className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
                     Correo electrónico
                   </label>
                   <input
+                    id="contact-email"
                     required
                     type="email"
                     placeholder="tucorreo@ejemplo.com"
@@ -248,28 +251,30 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <label htmlFor="contact-service" className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
                     Servicio requerido
                   </label>
                   <select
+                    id="contact-service"
                     className={inputClass}
                     style={{ ...inputStyle, appearance: 'none' }}
                     value={form.service}
                     onChange={(e) => setForm({ ...form, service: e.target.value })}
                   >
                     <option value="">Selecciona un servicio...</option>
-                    {services.map((svc) => (
-                      <option key={svc.title} value={svc.title}>{svc.title}</option>
+                    {maintenancePlans.map((plan) => (
+                      <option key={plan.name} value={plan.name}>{plan.name}</option>
                     ))}
                     <option>Otro</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <label htmlFor="contact-message" className="block text-xs font-semibold mb-1.5 text-[#6B6B6B] uppercase tracking-wider" style={{ fontFamily: 'Inter, sans-serif' }}>
                     Mensaje
                   </label>
                   <textarea
+                    id="contact-message"
                     rows={4}
                     placeholder="Cuéntanos sobre tu bicicleta y lo que necesitas..."
                     className={inputClass}

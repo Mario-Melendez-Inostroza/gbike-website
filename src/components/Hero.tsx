@@ -13,9 +13,12 @@ export default function Hero() {
       {/* Background photo */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1676531443468-0e2b5a57e48f?w=1800&h=1000&fit=crop&auto=format"
+          src="/images/hero/hero.webp"
           alt="Mecánico trabajando en una bicicleta en el taller GBIKE"
           className="w-full h-full object-cover"
+          width={1800}
+          height={1000}
+          fetchPriority="high"
           style={{ opacity: 0.35 }}
         />
         {/* Multi-layer gradient overlay */}
@@ -152,8 +155,8 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-white/30 text-xs tracking-widest" style={{ fontFamily: 'Inter, sans-serif' }}>SCROLL</span>
-        <ChevronDown size={18} className="text-white/30 animate-bounce" />
+        <span className="text-white/50 text-xs tracking-widest" style={{ fontFamily: 'Inter, sans-serif' }}>SCROLL</span>
+        <ChevronDown size={18} className="text-white/50 animate-bounce" aria-hidden="true" />
       </div>
     </section>
   )

@@ -67,9 +67,22 @@ export default function WhyUs() {
               lineHeight: 0.95,
             }}
           >
-            LA DIFERENCIA<br />
-            <span style={{ color: '#E30613' }}>GBIKE</span>
+            LA DIFERENCIA
           </h2>
+          {/* Logo oficial como firma de marca de la sección */}
+          <img
+            src="/images/logo/L1.webp"
+            alt="GBIKE"
+            width={128}
+            height={128}
+            className="mx-auto mt-6 rounded-2xl"
+            style={{
+              width: 'clamp(96px, 12vw, 128px)',
+              height: 'auto',
+              boxShadow: '0 12px 40px rgba(227,6,19,0.18)',
+              border: '1px solid rgba(255,255,255,0.08)',
+            }}
+          />
         </div>
 
         {/* Cards */}
@@ -115,7 +128,7 @@ export default function WhyUs() {
                   {r.title}
                 </h3>
                 <p
-                  className="text-white/45 text-sm leading-relaxed"
+                  className="text-white/55 text-sm leading-relaxed"
                   style={{ fontFamily: 'Inter, sans-serif' }}
                 >
                   {r.desc}

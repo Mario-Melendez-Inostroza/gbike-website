@@ -160,7 +160,7 @@ export default function Location() {
             {/* Photo of the actual store, so customers recognize it on arrival */}
             <div className="relative rounded-2xl overflow-hidden group" style={{ background: '#111' }}>
               <img
-                src="/images/location/location.jpeg"
+                src="/images/location/location.webp"
                 alt="Fachada del local de GBIKE en Av. Providencia 2411, Local 25"
                 loading="lazy"
                 className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-[1.02]"

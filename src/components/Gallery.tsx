@@ -1,18 +1,18 @@
 const works = [
-  { src: '/images/gallery/works/1w.jpeg', alt: 'Trabajo de mantenimiento realizado en el taller GBIKE' },
-  { src: '/images/gallery/works/2w.jpeg', alt: 'Bicicleta en servicio técnico en el taller GBIKE' },
-  { src: '/images/gallery/works/3wjpeg.jpeg', alt: 'Reparación de bicicleta en el taller GBIKE' },
-  { src: '/images/gallery/works/4w.jpeg', alt: 'Puesta a punto de bicicleta en GBIKE' },
-  { src: '/images/gallery/works/5w.jpeg', alt: 'Bicicleta reparada y lista para entrega en GBIKE' },
-  { src: '/images/gallery/works/6w.jpeg', alt: 'Servicio de transmisión realizado en GBIKE' },
-  { src: '/images/gallery/works/w7.jpeg', alt: 'Detalle de trabajo mecánico en el taller GBIKE' },
+  { src: '/images/gallery/works/1w.webp', alt: 'Trabajo de mantenimiento realizado en el taller GBIKE' },
+  { src: '/images/gallery/works/2w.webp', alt: 'Bicicleta en servicio técnico en el taller GBIKE' },
+  { src: '/images/gallery/works/3wjpeg.webp', alt: 'Reparación de bicicleta en el taller GBIKE' },
+  { src: '/images/gallery/works/4w.webp', alt: 'Puesta a punto de bicicleta en GBIKE' },
+  { src: '/images/gallery/works/5w.webp', alt: 'Bicicleta reparada y lista para entrega en GBIKE' },
+  { src: '/images/gallery/works/6w.webp', alt: 'Servicio de transmisión realizado en GBIKE' },
+  { src: '/images/gallery/works/w7.webp', alt: 'Detalle de trabajo mecánico en el taller GBIKE' },
 ]
 
 const products = [
-  { src: '/images/gallery/products/1p.jpeg', alt: 'Accesorios para bicicleta disponibles en GBIKE' },
-  { src: '/images/gallery/products/2p.jpeg', alt: 'Repuestos para bicicleta en la tienda GBIKE' },
-  { src: '/images/gallery/products/3p.jpeg', alt: 'Productos y accesorios en exhibición en GBIKE' },
-  { src: '/images/gallery/products/4p.jpeg', alt: 'Venta de accesorios para ciclismo en GBIKE' },
+  { src: '/images/gallery/products/1p.webp', alt: 'Accesorios para bicicleta disponibles en GBIKE' },
+  { src: '/images/gallery/products/2p.webp', alt: 'Repuestos para bicicleta en la tienda GBIKE' },
+  { src: '/images/gallery/products/3p.webp', alt: 'Productos y accesorios en exhibición en GBIKE' },
+  { src: '/images/gallery/products/4p.webp', alt: 'Venta de accesorios para ciclismo en GBIKE' },
 ]
 
 function PhotoCard({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {

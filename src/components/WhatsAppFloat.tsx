@@ -73,6 +73,7 @@ export default function WhatsAppFloat() {
           boxShadow: '0 8px 32px rgba(37,211,102,0.45)',
         }}
         aria-label="Contactar por WhatsApp"
+        aria-expanded={open}
       >
         {open ? <X size={22} /> : <WhatsAppIcon size={26} />}
       </button>

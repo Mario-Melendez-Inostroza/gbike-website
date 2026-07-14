@@ -1,7 +1,17 @@
 node_modules/
 dist/
+
 .vscode/
 .DS_Store
+
 .env
 .env.local
+
 npm-debug.log*
+
+design-assets/
+
+CLAUDE.md
+AGENTS.md
+
+*.tsbuildinfo

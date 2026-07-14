@@ -29,14 +29,14 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-18" style={{ height: '72px' }}>
         {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-2.5 group">
+        <a href="#inicio" className="flex items-center gap-1.5 group">
           <img
-            src="/images/logo/L1.jpeg"
+            src="/images/logo/L1.webp"
             alt=""
-            width={38}
-            height={38}
+            width={52}
+            height={52}
             className="rounded-lg object-cover"
-            style={{ width: '38px', height: '38px' }}
+            style={{ width: '52px', height: '52px' }}
           />
           <span
             className="font-display tracking-widest text-white text-xl"
@@ -83,7 +83,9 @@ export default function Header() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white p-2"
-          aria-label="Menú"
+          aria-label="Abrir menú de navegación"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -92,6 +94,7 @@ export default function Header() {
       {/* Mobile menu */}
       {menuOpen && (
         <div
+          id="mobile-menu"
           className="md:hidden px-6 pb-6 pt-2"
           style={{ background: 'rgba(13,13,13,0.97)', backdropFilter: 'blur(16px)' }}
         >
