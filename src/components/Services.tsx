@@ -56,7 +56,7 @@ export default function Services() {
     <section id="servicios" className="py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-16">
           <div>
             <span
               className="text-xs font-semibold tracking-widest uppercase mb-3 block"
@@ -79,8 +79,8 @@ export default function Services() {
             </h2>
           </div>
           <p
-            className="text-[#6B6B6B] max-w-xs leading-relaxed text-sm"
-            style={{ fontFamily: 'Inter, sans-serif' }}
+            className="font-medium max-w-md leading-relaxed text-lg md:text-xl"
+            style={{ fontFamily: 'Inter, sans-serif', color: '#3A3A3A' }}
           >
             Tres niveles de mantenimiento según lo que tu bicicleta necesita. Cuéntanos cómo la usas y te recomendamos el indicado.
           </p>
