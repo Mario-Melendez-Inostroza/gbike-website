@@ -72,7 +72,7 @@ export default function SeoJsonLd() {
     alternateName: siteConfig.legalName,
     description: siteConfig.description,
     url: siteConfig.domain,
-    image: `${siteConfig.domain}/images/logo/L1.jpeg`,
+    image: `${siteConfig.domain}/images/logo/L2-web.jpeg`,
     telephone: business.phone.display,
     email: business.email,
     address: {

@@ -9,12 +9,12 @@ const reasons = [
   {
     icon: Award,
     title: 'Técnicos Especializados',
-    desc: 'Nuestro equipo cuenta con formación técnica certificada y años de experiencia en bicicletas de ruta, MTB, urbanas y eléctricas.',
+    desc: 'Nuestro equipo cuenta con formación técnica certificada y años de experiencia en bicicletas de ruta, MTB y urbanas.',
   },
   {
     icon: ShieldCheck,
     title: 'Repuestos de Calidad',
-    desc: 'Trabajamos únicamente con marcas reconocidas. Los repuestos que instalamos son los mismos que usan los ciclistas profesionales.',
+    desc: 'Repuestos de calidad de marcas conocidas, instalados con el ajuste adecuado para tu bicicleta y tu tipo de uso.',
   },
   {
     icon: Star,
@@ -67,7 +67,7 @@ export default function WhyUs() {
           </h2>
           {/* Logo oficial como firma de marca de la sección */}
           <img
-            src="/images/logo/L1.webp"
+            src="/images/logo/L2-web.webp"
             alt="GBIKE"
             width={128}
             height={128}

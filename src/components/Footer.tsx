@@ -27,12 +27,12 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
               <img
-                src="/images/logo/L1.webp"
+                src="/images/logo/L2-web.webp"
                 alt=""
-                width={38}
+                width={46}
                 height={38}
-                className="rounded-lg object-cover"
-                style={{ width: '38px', height: '38px' }}
+                className="rounded-lg"
+                style={{ height: '38px', width: 'auto' }}
               />
               <span
                 className="text-white text-xl"

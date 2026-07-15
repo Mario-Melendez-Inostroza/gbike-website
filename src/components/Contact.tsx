@@ -2,7 +2,7 @@ import { useState, type FormEvent, type ReactNode } from 'react'
 import { Mail, Send, CheckCircle2 } from 'lucide-react'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
 import WhatsAppLogo from './WhatsAppIcon'
-import { maintenancePlans } from './Services'
+import { services } from './Services'
 
 const WhatsAppIcon = () => (
   <span style={{ color: '#fff', display: 'flex' }}>
@@ -262,8 +262,8 @@ export default function Contact() {
                     onChange={(e) => setForm({ ...form, service: e.target.value })}
                   >
                     <option value="">Selecciona un servicio...</option>
-                    {maintenancePlans.map((plan) => (
-                      <option key={plan.name} value={plan.name}>{plan.name}</option>
+                    {services.map((svc) => (
+                      <option key={svc.title} value={svc.title}>{svc.title}</option>
                     ))}
                     <option>Otro</option>
                   </select>

@@ -1,53 +1,114 @@
-import { Wrench, Settings, Zap, Check } from 'lucide-react'
+import {
+  Wrench, RotateCcw, Zap, CircleDot, Disc, Settings,
+  Droplets, Minus, Package, CircleOff, Layers, Box,
+  Plus, ShoppingBag, Compass, Cog, LifeBuoy, Link, Luggage, Timer,
+} from 'lucide-react'
 
 /**
  * Única fuente de verdad de los servicios de GBIKE.
  * El formulario de contacto deriva sus opciones de esta lista.
+ * Los tres mantenimientos y el servicio express encabezan; el resto va en orden alfabético.
  */
-export const maintenancePlans = [
+export const services = [
   {
     icon: Wrench,
-    name: 'Mantenimiento Básico',
-    tagline: 'La puesta a punto esencial para tu rodada diaria.',
-    includes: [
-      'Ajuste y regulación de cambios',
-      'Ajuste y regulación de frenos',
-      'Inflado y calibración de ruedas',
-      'Lavado completo de bicicleta',
-      'Lubricación de cadena',
-    ],
+    title: 'Mantenimiento Básico',
+    desc: 'Lavado, lubricación de cadena, ajuste de frenos y cambios, e inflado y calibración de ruedas.',
   },
   {
     icon: Settings,
-    name: 'Mantenimiento Completo',
-    tagline: 'Revisión profunda con renovación de piolas y fundas.',
-    includes: [
-      'Ajuste y regulación de cambios',
-      'Ajuste y regulación de frenos',
-      'Cambio de piolas y fundas',
-      'Inflado y calibración de ruedas',
-      'Lavado completo de bicicleta',
-      'Limpieza y engrase de dirección',
-      'Lubricación de cadena',
-    ],
+    title: 'Mantenimiento Completo',
+    desc: 'Revisión profunda con engrase de dirección y renovación de piolas y fundas incluida.',
   },
   {
     icon: Zap,
-    name: 'Mantenimiento Full',
-    tagline: 'Desarme total y reacondicionamiento de cada componente.',
-    includes: [
-      'Ajuste y regulación de cambios',
-      'Ajuste y regulación de frenos',
-      'Cambio de piolas y fundas',
-      'Centrado de ruedas',
-      'Desarme completo de bicicleta',
-      'Inflado y calibración de ruedas',
-      'Lavado completo de bicicleta',
-      'Limpieza y engrase de dirección',
-      'Limpieza y engrase de masas (ruedas)',
-      'Limpieza y engrase de motor',
-      'Lubricación de cadena',
-    ],
+    title: 'Mantenimiento Full',
+    desc: 'Desarme total de la bicicleta con limpieza, engrase y calibración de cada componente.',
+  },
+  {
+    icon: Timer,
+    title: 'Servicio Express para tu Bicicleta',
+    desc: 'Reparaciones rápidas como cambio de cámaras, ajustes menores y soluciones inmediatas para que vuelvas a rodar cuanto antes.',
+  },
+  {
+    icon: RotateCcw,
+    title: 'Ajuste de Cambios',
+    desc: 'Regulación fina de desviadores y manillas para cambios suaves y exactos.',
+  },
+  {
+    icon: Disc,
+    title: 'Ajuste de Frenos',
+    desc: 'Calibración de frenos de disco o herradura para una frenada segura.',
+  },
+  {
+    icon: Box,
+    title: 'Armado de Bicicletas',
+    desc: 'Ensamble completo y regulado de bicicletas nuevas desde caja.',
+  },
+  {
+    icon: Package,
+    title: 'Cambio de Funda',
+    desc: 'Renovación de fundas para un accionamiento suave y protegido.',
+  },
+  {
+    icon: Minus,
+    title: 'Cambio de Piola',
+    desc: 'Reemplazo de cables de freno o cambio desgastados por piolas nuevas.',
+  },
+  {
+    icon: CircleDot,
+    title: 'Centrado de Rueda',
+    desc: 'Corrección de alabeos y tensión de rayos para un rodado firme y preciso.',
+  },
+  {
+    icon: Compass,
+    title: 'Engrase de Dirección',
+    desc: 'Desmontaje, limpieza y engrase del juego de dirección para un manejo fluido.',
+  },
+  {
+    icon: Cog,
+    title: 'Engrase de Motor',
+    desc: 'Mantenimiento del eje de centro con grasa de alta resistencia.',
+  },
+  {
+    icon: LifeBuoy,
+    title: 'Engrase de Rueda',
+    desc: 'Limpieza y engrase de masas para un giro libre y silencioso.',
+  },
+  {
+    icon: CircleOff,
+    title: 'Instalación de Cámara',
+    desc: 'Cambio de cámaras con revisión del neumático y la llanta.',
+  },
+  {
+    icon: Layers,
+    title: 'Instalación de Neumáticos',
+    desc: 'Montaje de neumáticos nuevos con la presión adecuada para tu rodado.',
+  },
+  {
+    icon: Luggage,
+    title: 'Instalación de Parrilla',
+    desc: 'Montaje firme y alineado de parrillas portaequipaje.',
+  },
+  {
+    icon: Plus,
+    title: 'Instalación Simple',
+    desc: 'Montaje de accesorios: luces, alforjas, guardabarros, portabidones y más.',
+  },
+  {
+    icon: Droplets,
+    title: 'Lavado de Bicicleta y Transmisión',
+    desc: 'Lavado completo con desengrase profundo de cadena, cassette y platos.',
+  },
+  {
+    icon: Link,
+    title: 'Lubricación de Cadena',
+    desc: 'Aplicación de lubricante específico según tu tipo de uso y terreno.',
+  },
+  {
+    icon: ShoppingBag,
+    title: 'Venta de Repuestos y Accesorios',
+    desc: 'Repuestos y accesorios de calidad de marcas conocidas, para todos los estilos.',
   },
 ]
 
@@ -82,18 +143,18 @@ export default function Services() {
             className="font-medium max-w-md leading-relaxed text-lg md:text-xl"
             style={{ fontFamily: 'Inter, sans-serif', color: '#3A3A3A' }}
           >
-            Tres niveles de mantenimiento según lo que tu bicicleta necesita. Cuéntanos cómo la usas y te recomendamos el indicado.
+            Mantenimientos, reparaciones rápidas, instalaciones y repuestos. Cuéntanos qué necesita tu bicicleta y te recomendamos el servicio indicado.
           </p>
         </div>
 
-        {/* Maintenance plans */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          {maintenancePlans.map((plan) => {
-            const Icon = plan.icon
+        {/* Services grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {services.map((svc) => {
+            const Icon = svc.icon
             return (
               <div
-                key={plan.name}
-                className="group relative p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                key={svc.title}
+                className="group relative p-6 rounded-2xl cursor-default transition-all duration-300 hover:-translate-y-1"
                 style={{
                   background: '#0D0D0D',
                   border: '1.5px solid rgba(255,255,255,0.04)',
@@ -102,51 +163,34 @@ export default function Services() {
               >
                 {/* Icon */}
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-105"
+                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-105"
                   style={{
                     background: 'rgba(227,6,19,0.12)',
                     border: '1px solid rgba(227,6,19,0.25)',
                   }}
                 >
-                  <Icon size={22} style={{ color: '#E30613' }} />
+                  <Icon size={20} style={{ color: '#E30613' }} />
                 </div>
 
-                {/* Name */}
+                {/* Title */}
                 <h3
-                  className="font-display text-white text-3xl mb-2 uppercase"
-                  style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 800, lineHeight: 1 }}
+                  className="font-semibold mb-2 text-sm text-white"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
                 >
-                  {plan.name}
+                  {svc.title}
                 </h3>
 
-                {/* Tagline */}
+                {/* Desc */}
                 <p
-                  className="text-xs leading-relaxed mb-6"
+                  className="text-xs leading-relaxed"
                   style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(255,255,255,0.6)' }}
                 >
-                  {plan.tagline}
+                  {svc.desc}
                 </p>
-
-                {/* Divider */}
-                <div className="h-px mb-6" style={{ background: 'rgba(255,255,255,0.08)' }} />
-
-                {/* Includes */}
-                <ul className="flex flex-col gap-3">
-                  {plan.includes.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2.5 text-sm"
-                      style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(255,255,255,0.75)' }}
-                    >
-                      <Check size={15} className="flex-shrink-0 mt-0.5" style={{ color: '#E30613' }} />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
 
                 {/* Bottom accent line */}
                 <div
-                  className="absolute bottom-0 left-8 right-8 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute bottom-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: 'linear-gradient(90deg, transparent, #E30613, transparent)' }}
                 />
 

@@ -35,12 +35,12 @@ export default function Header() {
           aria-label="GBIKE — ir al inicio"
         >
           <img
-            src="/images/logo/L1.webp"
+            src="/images/logo/L2-web.webp"
             alt=""
-            width={64}
+            width={78}
             height={64}
-            className="rounded-lg object-cover transition-all duration-300 group-hover:brightness-110"
-            style={{ width: '64px', height: '64px' }}
+            className="rounded-lg transition-all duration-300 group-hover:brightness-110"
+            style={{ height: '64px', width: 'auto' }}
           />
           <span
             className="font-display tracking-widest text-white text-2xl transition-colors duration-300"
