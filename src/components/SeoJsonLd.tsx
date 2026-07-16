@@ -87,10 +87,14 @@ export default function SeoJsonLd() {
     sameAs: [business.social.instagram.url, business.social.facebook.url],
   }
 
+  // Escapa "<" para que un valor editable (p. ej. la dirección) no pueda
+  // cerrar el </script> prematuramente e inyectar HTML en la página.
+  const json = JSON.stringify(jsonLd).replace(/</g, '\\u003c')
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: json }}
     />
   )
 }
