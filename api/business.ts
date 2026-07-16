@@ -1,10 +1,37 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { list, put } from '@vercel/blob'
+import { get, put } from '@vercel/blob'
 import { defaultBusinessConfig } from '../src/config/site.js'
 import { mergeBusinessConfig } from '../src/config/loadBusinessConfig.js'
 import { SESSION_COOKIE, isValidSession, parseCookies } from './_auth.js'
 
 const BLOB_NAME = 'business.json'
+
+/**
+ * Nivel de acceso con el que se guarda y se lee el blob. Debe ser el MISMO
+ * valor en ambos lados: `get()` con 'private' no puede leer un blob que se
+ * escribió con 'public' y viceversa (son namespaces distintos en la API).
+ *
+ * Usamos `get(pathname, { access })`, autenticado con BLOB_READ_WRITE_TOKEN,
+ * en vez de `list()` + fetch(url) público: así la lectura funciona igual si
+ * el store es Public o Private. Con 'public' además el blob queda accesible
+ * directamente por URL/CDN, lo cual no hace falta aquí pero no estorba.
+ */
+const BLOB_ACCESS = 'public' as const
+
+function logBlobError(action: string, error: unknown) {
+  const details =
+    error instanceof Error
+      ? { name: error.name, message: error.message, stack: error.stack }
+      : { value: error }
+  // Vercel captura console.error en los logs de la función — visible en
+  // Deployments → [deployment] → Functions → api/business.
+  console.error(`[api/business] fallo en ${action}:`, details)
+}
+
+/** Mensaje seguro para el cliente: solo llega hasta aquí un admin autenticado. */
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : 'Error desconocido'
+}
 
 /**
  * GET /api/business — datos del negocio: Blob si existe, defaults si no.
@@ -16,16 +43,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     res.setHeader('Cache-Control', 'no-store')
     try {
-      const { blobs } = await list({ prefix: BLOB_NAME, limit: 1 })
-      if (blobs.length > 0) {
-        const stored = await fetch(blobs[0].url, { cache: 'no-store' })
-        if (stored.ok) {
-          res.status(200).json(mergeBusinessConfig(await stored.json()))
-          return
-        }
+      const result = await get(BLOB_NAME, { access: BLOB_ACCESS })
+      if (result) {
+        const raw: unknown = await new Response(result.stream).json()
+        res.status(200).json(mergeBusinessConfig(raw))
+        return
       }
-    } catch {
-      // Sin Blob configurado o inaccesible: se responde con los defaults.
+      // result === null: el blob todavía no existe (primer arranque, nunca se guardó nada).
+    } catch (error) {
+      logBlobError('GET (lectura del blob)', error)
     }
     res.status(200).json(defaultBusinessConfig)
     return
@@ -50,14 +76,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     try {
       await put(BLOB_NAME, JSON.stringify(merged, null, 2), {
-        access: 'public',
+        access: BLOB_ACCESS,
         contentType: 'application/json',
         addRandomSuffix: false,
         allowOverwrite: true,
       })
-    } catch {
+    } catch (error) {
+      logBlobError('PUT (escritura del blob)', error)
       res.status(500).json({
-        error: 'No se pudo guardar. Verifica que el proyecto tenga un Blob store conectado en Vercel.',
+        error: `No se pudo guardar: ${errorMessage(error)}`,
       })
       return
     }
