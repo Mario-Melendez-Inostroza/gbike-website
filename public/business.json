@@ -15,11 +15,27 @@
     "mapsEmbedUrl": "https://www.google.com/maps?q=Av.+Providencia+2411,+Providencia,+Santiago,+Chile&output=embed"
   },
   "social": {
-    "instagram": { "handle": "@gbike.cl", "url": "https://instagram.com/gbike.cl" },
-    "facebook": { "handle": "GBIKE", "url": "https://www.facebook.com/p/GBIKE-61571919581893/" }
+    "instagram": {
+      "handle": "@gbike.cl",
+      "url": "https://instagram.com/gbike.cl"
+    },
+    "facebook": {
+      "handle": "GBIKE",
+      "url": "https://www.facebook.com/p/GBIKE-61571919581893/"
+    }
   },
   "hours": [
-    { "day": "Lunes – Viernes", "time": "10:00 – 19:30" },
-    { "day": "Sábados, Domingos y Festivos", "time": "10:00 – 14:00" }
+    {
+      "day": "Lunes – Viernes",
+      "time": "10:00 – 19:30"
+    },
+    {
+      "day": "Sábados",
+      "time": "10:00 – 14:00"
+    },
+    {
+      "day": "Domingos y Festivos",
+      "time": "10:00 – 14:00"
+    }
   ]
 }

@@ -40,7 +40,12 @@ function pickHours(value: unknown, fallback: HoursEntry[]): HoursEntry[] {
   return entries.length > 0 ? entries : fallback
 }
 
-function mergeBusinessConfig(raw: unknown): BusinessConfig {
+/**
+ * Fusiona datos crudos sobre los defaults, campo a campo.
+ * Se usa en el navegador (carga del sitio) y en el servidor
+ * (validación/sanitización de lo que guarda el panel de administración).
+ */
+export function mergeBusinessConfig(raw: unknown): BusinessConfig {
   const d = defaultBusinessConfig
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const r = (typeof raw === 'object' && raw !== null ? raw : {}) as Record<string, any>
@@ -76,13 +81,21 @@ function mergeBusinessConfig(raw: unknown): BusinessConfig {
 }
 
 export async function loadBusinessConfig(): Promise<BusinessConfig> {
-  try {
-    // Cache-buster: evita que el hosting sirva una versión cacheada tras una edición.
-    const res = await fetch(`/business.json?v=${Date.now()}`)
-    if (!res.ok) return defaultBusinessConfig
-    const raw: unknown = await res.json()
-    return mergeBusinessConfig(raw)
-  } catch {
-    return defaultBusinessConfig
+  // Fuentes en orden de prioridad (cache-buster para evitar versiones viejas):
+  // 1. /api/business — datos guardados desde el panel /panel (Vercel Blob)
+  // 2. /business.json — archivo estático, fallback si la API no responde
+  // 3. defaults compilados — la página nunca queda sin datos
+  const sources = [`/api/business?v=${Date.now()}`, `/business.json?v=${Date.now()}`]
+
+  for (const url of sources) {
+    try {
+      const res = await fetch(url)
+      if (!res.ok) continue
+      const raw: unknown = await res.json()
+      return mergeBusinessConfig(raw)
+    } catch {
+      // probar la siguiente fuente
+    }
   }
+  return defaultBusinessConfig
 }

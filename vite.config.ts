@@ -17,4 +17,13 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 5173,
   },
+  build: {
+    rollupOptions: {
+      // Entradas separadas: el panel /panel no añade ni un byte al sitio público.
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        panel: path.resolve(__dirname, "panel.html"),
+      },
+    },
+  },
 });

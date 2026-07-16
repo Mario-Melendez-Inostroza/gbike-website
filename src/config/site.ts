@@ -68,7 +68,8 @@ export const defaultBusinessConfig: BusinessConfig = {
   },
   hours: [
     { day: 'Lunes – Viernes', time: '10:00 – 19:30' },
-    { day: 'Sábados, Domingos y Festivos', time: '10:00 – 14:00' },
+    { day: 'Sábados', time: '10:00 – 14:00' },
+    { day: 'Domingos y Festivos', time: '10:00 – 14:00' },
   ],
 }
 
