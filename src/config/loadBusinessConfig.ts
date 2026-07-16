@@ -1,4 +1,4 @@
-import { defaultBusinessConfig, type BusinessConfig, type HoursEntry } from './site'
+import { defaultBusinessConfig, type BusinessConfig, type HoursEntry } from './site.js'
 
 /**
  * Carga defensiva de `public/business.json`.

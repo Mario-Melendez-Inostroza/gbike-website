@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
-import { siteConfig } from '../config/site'
-import { useBusinessConfig } from '../config/BusinessConfigContext'
-import WhatsAppIcon from './WhatsAppIcon'
+import { siteConfig } from '../config/site.js'
+import { useBusinessConfig } from '../config/BusinessConfigContext.js'
+import WhatsAppIcon from './WhatsAppIcon.js'
 
 export default function WhatsAppFloat() {
   const [open, setOpen] = useState(false)

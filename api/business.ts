@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { list, put } from '@vercel/blob'
-import { defaultBusinessConfig } from '../src/config/site'
-import { mergeBusinessConfig } from '../src/config/loadBusinessConfig'
-import { SESSION_COOKIE, isValidSession, parseCookies } from './_auth'
+import { defaultBusinessConfig } from '../src/config/site.js'
+import { mergeBusinessConfig } from '../src/config/loadBusinessConfig.js'
+import { SESSION_COOKIE, isValidSession, parseCookies } from './_auth.js'
 
 const BLOB_NAME = 'business.json'
 

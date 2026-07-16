@@ -1,5 +1,5 @@
-import { siteConfig, type HoursEntry } from '../config/site'
-import { useBusinessConfig } from '../config/BusinessConfigContext'
+import { siteConfig, type HoursEntry } from '../config/site.js'
+import { useBusinessConfig } from '../config/BusinessConfigContext.js'
 
 /**
  * Datos estructurados schema.org (LocalBusiness/BikeStore) para SEO local.

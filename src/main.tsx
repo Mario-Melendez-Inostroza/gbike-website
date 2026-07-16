@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App'
-import { BusinessConfigProvider } from './config/BusinessConfigContext'
+import App from './App.js'
+import { BusinessConfigProvider } from './config/BusinessConfigContext.js'
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(

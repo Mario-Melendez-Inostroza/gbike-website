@@ -1,8 +1,8 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { Mail, Send, CheckCircle2 } from 'lucide-react'
-import { useBusinessConfig } from '../config/BusinessConfigContext'
-import WhatsAppLogo from './WhatsAppIcon'
-import { services } from './Services'
+import { useBusinessConfig } from '../config/BusinessConfigContext.js'
+import WhatsAppLogo from './WhatsAppIcon.js'
+import { services } from './Services.js'
 
 const WhatsAppIcon = () => (
   <span style={{ color: '#fff', display: 'flex' }}>

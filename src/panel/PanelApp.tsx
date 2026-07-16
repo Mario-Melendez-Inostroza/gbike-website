@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties, type FormEvent } from 'react'
-import { editableFields, panelMeta } from '../config/editableFields'
-import type { BusinessConfig } from '../config/site'
+import { editableFields, panelMeta } from '../config/editableFields.js'
+import type { BusinessConfig } from '../config/site.js'
 
 /**
  * Panel de administración genérico: el formulario se genera desde

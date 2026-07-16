@@ -1,5 +1,5 @@
 import { MapPin, Clock, Phone, Navigation } from 'lucide-react'
-import { useBusinessConfig } from '../config/BusinessConfigContext'
+import { useBusinessConfig } from '../config/BusinessConfigContext.js'
 
 export default function Location() {
   const { business } = useBusinessConfig()

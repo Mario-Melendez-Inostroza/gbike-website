@@ -6,8 +6,8 @@ import {
   parseCookies,
   passwordMatches,
   sessionCookie,
-} from './_auth'
-import { clearFailures, clientIp, lockedForMs, registerFailure } from './_rateLimit'
+} from './_auth.js'
+import { clearFailures, clientIp, lockedForMs, registerFailure } from './_rateLimit.js'
 
 /**
  * GET  /api/login — indica si la cookie de sesión actual es válida.

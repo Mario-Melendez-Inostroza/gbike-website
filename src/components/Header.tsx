@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
-import { siteConfig } from '../config/site'
-import { useBusinessConfig } from '../config/BusinessConfigContext'
-import WhatsAppIcon from './WhatsAppIcon'
-import { GALLERY_OPEN_EVENT } from './Gallery'
+import { siteConfig } from '../config/site.js'
+import { useBusinessConfig } from '../config/BusinessConfigContext.js'
+import WhatsAppIcon from './WhatsAppIcon.js'
+import { GALLERY_OPEN_EVENT } from './Gallery.js'
 
 const navLinks = siteConfig.navLinks
 

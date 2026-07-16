@@ -1,13 +1,13 @@
-import Header from './components/Header'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import WhyUs from './components/WhyUs'
-import Gallery from './components/Gallery'
-import Location from './components/Location'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import WhatsAppFloat from './components/WhatsAppFloat'
-import SeoJsonLd from './components/SeoJsonLd'
+import Header from './components/Header.js'
+import Hero from './components/Hero.js'
+import Services from './components/Services.js'
+import WhyUs from './components/WhyUs.js'
+import Gallery from './components/Gallery.js'
+import Location from './components/Location.js'
+import Contact from './components/Contact.js'
+import Footer from './components/Footer.js'
+import WhatsAppFloat from './components/WhatsAppFloat.js'
+import SeoJsonLd from './components/SeoJsonLd.js'
 
 export default function App() {
   return (

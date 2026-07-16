@@ -1,6 +1,6 @@
 import { ChevronDown, Wrench, ShieldCheck } from 'lucide-react'
-import { useBusinessConfig } from '../config/BusinessConfigContext'
-import WhatsAppIcon from './WhatsAppIcon'
+import { useBusinessConfig } from '../config/BusinessConfigContext.js'
+import WhatsAppIcon from './WhatsAppIcon.js'
 
 export default function Hero() {
   const { whatsappUrl } = useBusinessConfig()

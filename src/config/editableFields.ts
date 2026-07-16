@@ -1,4 +1,4 @@
-import type { BusinessConfig } from './site'
+import type { BusinessConfig } from './site.js'
 
 /**
  * Esquema de los campos que el cliente puede editar desde /panel.

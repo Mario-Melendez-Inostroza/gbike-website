@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
-import { defaultBusinessConfig, whatsappUrl, type BusinessConfig } from './site'
-import { loadBusinessConfig } from './loadBusinessConfig'
+import { defaultBusinessConfig, whatsappUrl, type BusinessConfig } from './site.js'
+import { loadBusinessConfig } from './loadBusinessConfig.js'
 
 const BusinessConfigContext = createContext<BusinessConfig>(defaultBusinessConfig)
 

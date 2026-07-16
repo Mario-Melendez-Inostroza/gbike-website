@@ -1,7 +1,7 @@
 import { Mail } from 'lucide-react'
-import { siteConfig } from '../config/site'
-import { useBusinessConfig } from '../config/BusinessConfigContext'
-import WhatsAppIcon from './WhatsAppIcon'
+import { siteConfig } from '../config/site.js'
+import { useBusinessConfig } from '../config/BusinessConfigContext.js'
+import WhatsAppIcon from './WhatsAppIcon.js'
 
 const InstagramSvg = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
