@@ -11,6 +11,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* La galería colapsable gestiona el scroll manualmente; el anclaje
+     heurístico del navegador introduciría correcciones que compiten. */
+  overflow-anchor: none;
   /* Firefox */
   scrollbar-width: auto;
   scrollbar-color: #E30613 #181818;

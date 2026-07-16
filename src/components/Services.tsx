@@ -17,7 +17,7 @@ export const services = [
   },
   {
     icon: Settings,
-    title: 'Mantenimiento Completo',
+    title: 'Mantenimiento Intermedio',
     desc: 'Revisión profunda con engrase de dirección y renovación de piolas y fundas incluida.',
   },
   {

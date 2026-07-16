@@ -3,8 +3,16 @@ import { Menu, X } from 'lucide-react'
 import { siteConfig } from '../config/site'
 import { useBusinessConfig } from '../config/BusinessConfigContext'
 import WhatsAppIcon from './WhatsAppIcon'
+import { GALLERY_OPEN_EVENT } from './Gallery'
 
 const navLinks = siteConfig.navLinks
+
+/** La galería llega siempre abierta cuando se navega a ella desde el menú. */
+function handleNavLinkClick(href: string) {
+  if (href === '#galeria') {
+    window.dispatchEvent(new Event(GALLERY_OPEN_EVENT))
+  }
+}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -56,6 +64,7 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
+              onClick={() => handleNavLinkClick(link.href)}
               className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 relative group"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
@@ -106,7 +115,10 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                handleNavLinkClick(link.href)
+                setMenuOpen(false)
+              }}
               className="block py-3 text-white/80 hover:text-white border-b border-white/10 text-sm font-medium"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >

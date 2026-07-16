@@ -1,3 +1,12 @@
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+
+/** Evento que el Header dispara para forzar la apertura al navegar desde el menú. */
+export const GALLERY_OPEN_EVENT = 'gbike:open-gallery'
+
+/** Duración de la animación de colapso (grid-template-rows) que anima el contenedor de fotos. */
+const COLLAPSE_DURATION_MS = 500
+
+
 const works = [
   { src: '/images/gallery/works/1w.webp', alt: 'Trabajo de mantenimiento realizado en el taller GBIKE' },
   { src: '/images/gallery/works/2w.webp', alt: 'Bicicleta en servicio técnico en el taller GBIKE' },
@@ -41,6 +50,37 @@ function PhotoCard({ src, alt, className = '' }: { src: string; alt: string; cla
   )
 }
 
+/** Botón único de apertura/cierre, reutilizado arriba y al final de la galería. */
+function GalleryToggleButton({
+  open,
+  onToggle,
+  className = '',
+  tabIndex,
+}: {
+  open: boolean
+  onToggle: () => void
+  className?: string
+  tabIndex?: number
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      aria-expanded={open}
+      aria-controls="galeria-fotos"
+      tabIndex={tabIndex}
+      className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 ${className}`}
+      style={{
+        fontFamily: 'Inter, sans-serif',
+        border: '1.5px solid #E30613',
+        color: open ? '#fff' : '#E30613',
+        background: open ? '#E30613' : 'transparent',
+      }}
+    >
+      📷 {open ? 'Ocultar Galería' : 'Ver Galería'}
+    </button>
+  )
+}
+
 function GroupLabel({ children }: { children: string }) {
   return (
     <div className="flex items-center gap-4 mb-6">
@@ -57,11 +97,118 @@ function GroupLabel({ children }: { children: string }) {
 }
 
 export default function Gallery() {
+  const [open, setOpen] = useState(false)
+  // Controla el montaje del botón inferior por separado de `open`: al abrir se
+  // monta de inmediato (misma base de altura desde el primer frame); al cerrar
+  // permanece montado durante toda la animación para no alterar esa base a
+  // mitad de camino, y solo se retira cuando el colapso realmente termina.
+  const [showBottomButton, setShowBottomButton] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const collapsibleRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleOpenRequest = () => setOpen(true)
+    window.addEventListener(GALLERY_OPEN_EVENT, handleOpenRequest)
+    return () => window.removeEventListener(GALLERY_OPEN_EVENT, handleOpenRequest)
+  }, [])
+
+  // Se ejecuta antes de pintar para que, si `open` pasa a true, el botón
+  // aparezca en el mismo frame en que arranca la expansión (sin parpadeo).
+  useLayoutEffect(() => {
+    if (open) setShowBottomButton(true)
+  }, [open])
+
+  // Al cerrar, esperar a que la transición de colapso termine de verdad antes
+  // de desmontar el botón. transitionend es la señal real de que la animación
+  // acabó; el timeout es solo una red de seguridad si el evento no llegara a
+  // dispararse (por ejemplo, con la pestaña en segundo plano).
+  useEffect(() => {
+    if (open) return
+    const node = collapsibleRef.current
+    if (!node) return
+
+    const unmountButton = () => setShowBottomButton(false)
+
+    function handleTransitionEnd(e: TransitionEvent) {
+      if (e.target === node && e.propertyName === 'grid-template-rows') {
+        unmountButton()
+      }
+    }
+
+    node.addEventListener('transitionend', handleTransitionEnd)
+    const fallback = window.setTimeout(unmountButton, COLLAPSE_DURATION_MS + 100)
+
+    return () => {
+      node.removeEventListener('transitionend', handleTransitionEnd)
+      window.clearTimeout(fallback)
+    }
+  }, [open])
+
+  /**
+   * El botón inferior cierra la galería manteniendo la vista clavada.
+   *
+   * En vez de dejar que el CSS anime el colapso y "perseguirlo" ajustando el
+   * scroll (siempre queda un desfase de sub-frame perceptible), esta función
+   * toma el control total: en cada frame calcula la altura del contenedor y
+   * la posición de scroll como un par exacto (scroll = scrollInicial − lo ya
+   * colapsado) y escribe ambos juntos antes del paint. Al ser la misma
+   * fuente la que decide ambos valores, el borde inferior de la galería —la
+   * frontera con "Encuéntranos Aquí"— no puede moverse ni un píxel: las
+   * fotos se desvanecen y comprimen en el sitio, y el usuario queda listo
+   * para seguir bajando hacia Ubicación.
+   */
+  function closeKeepingViewInPlace() {
+    const container = collapsibleRef.current
+    if (!container) {
+      setOpen(false)
+      return
+    }
+
+    const startHeight = container.getBoundingClientRect().height
+    const startScroll = window.scrollY
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const duration = reduceMotion ? 0 : COLLAPSE_DURATION_MS
+
+    // Tomamos el control: sin transición CSS, altura explícita conducida por JS.
+    container.style.transition = 'none'
+    container.style.height = `${startHeight}px`
+
+    const startTime = performance.now()
+    const easeOutCubic = (p: number) => 1 - Math.pow(1 - p, 3)
+
+    const tick = (now: number) => {
+      const progress = duration === 0 ? 1 : Math.min((now - startTime) / duration, 1)
+      const eased = easeOutCubic(progress)
+      const height = startHeight * (1 - eased)
+
+      // Altura y scroll se escriben juntos, en el mismo frame: lockstep exacto.
+      container.style.height = `${height}px`
+      container.style.opacity = `${1 - eased}`
+      window.scrollTo({ top: startScroll - (startHeight - height), behavior: 'instant' })
+
+      if (progress < 1) {
+        requestAnimationFrame(tick)
+      } else {
+        setOpen(false)
+        setShowBottomButton(false)
+        // Devolver el control al CSS una vez que React aplicó el estado cerrado
+        // (grid-template-rows: 0fr), para que el botón superior siga funcionando
+        // con su transición de siempre.
+        requestAnimationFrame(() => {
+          container.style.transition = ''
+          container.style.height = ''
+          container.style.opacity = ''
+        })
+      }
+    }
+    requestAnimationFrame(tick)
+  }
+
   return (
-    <section id="galeria" className="py-28 bg-white">
+    <section id="galeria" ref={sectionRef} className="py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <div>
             <span
               className="text-xs font-semibold tracking-widest uppercase mb-3 block"
@@ -90,34 +237,66 @@ export default function Gallery() {
           </p>
         </div>
 
-        {/* Works */}
-        <div className="mb-14">
-          <GroupLabel>Trabajos realizados</GroupLabel>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" style={{ gridAutoRows: '200px' }}>
-            {works.map((photo, i) => (
-              <PhotoCard
-                key={photo.src}
-                src={photo.src}
-                alt={photo.alt}
-                // Las dos fotos horizontales anclan la composición ocupando doble celda
-                className={i === 1 || i === 6 ? 'col-span-2 row-span-1' : 'col-span-1 row-span-2'}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Toggle */}
+        <GalleryToggleButton open={open} onToggle={() => setOpen((v) => !v)} className="mb-14" />
 
-        {/* Products */}
-        <div>
-          <GroupLabel>Productos y accesorios</GroupLabel>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {products.map((photo) => (
-              <PhotoCard
-                key={photo.src}
-                src={photo.src}
-                alt={photo.alt}
-                className="aspect-[3/4]"
-              />
-            ))}
+        {/* Collapsible photos */}
+        <div
+          ref={collapsibleRef}
+          style={{
+            display: 'grid',
+            gridTemplateRows: open ? '1fr' : '0fr',
+            opacity: open ? 1 : 0,
+            overflowAnchor: 'none',
+            transition: `grid-template-rows ${COLLAPSE_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms ease`,
+          }}
+        >
+          <div id="galeria-fotos" style={{ overflow: 'hidden', minHeight: 0 }}>
+            {/* Works */}
+            <div className="mb-14">
+              <GroupLabel>Trabajos realizados</GroupLabel>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" style={{ gridAutoRows: '200px' }}>
+                {works.map((photo, i) => (
+                  <PhotoCard
+                    key={photo.src}
+                    src={photo.src}
+                    alt={photo.alt}
+                    // Las dos fotos horizontales anclan la composición ocupando doble celda
+                    className={i === 1 || i === 6 ? 'col-span-2 row-span-1' : 'col-span-1 row-span-2'}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Products */}
+            <div>
+              <GroupLabel>Productos y accesorios</GroupLabel>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                {products.map((photo) => (
+                  <PhotoCard
+                    key={photo.src}
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="aspect-[3/4]"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom toggle — montado durante toda la animación; ver comentarios arriba */}
+            {showBottomButton && (
+              <div
+                className="flex justify-center mt-14"
+                aria-hidden={!open}
+                style={{ pointerEvents: open ? 'auto' : 'none' }}
+              >
+                <GalleryToggleButton
+                  open={open}
+                  onToggle={closeKeepingViewInPlace}
+                  tabIndex={open ? 0 : -1}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
