@@ -16,7 +16,7 @@ const BLOB_NAME = 'business.json'
  * el store es Public o Private. Con 'public' además el blob queda accesible
  * directamente por URL/CDN, lo cual no hace falta aquí pero no estorba.
  */
-const BLOB_ACCESS = 'public' as const
+const BLOB_ACCESS = 'private' as const
 
 function logBlobError(action: string, error: unknown) {
   const details =
