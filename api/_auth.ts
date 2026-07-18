@@ -12,7 +12,8 @@ import { createHash, createHmac, timingSafeEqual } from 'node:crypto'
  */
 
 export const SESSION_COOKIE = 'panel_session'
-const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000 // 7 días
+const HOUR_MS = 60 * 60 * 1000
+const SESSION_TTL_MS = 24 * HOUR_MS // 24 horas
 
 function sign(data: string, secret: string): string {
   return createHmac('sha256', secret).update(data).digest('hex')
